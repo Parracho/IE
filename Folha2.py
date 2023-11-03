@@ -148,15 +148,14 @@ print("Exercise 4")
 mean=60
 dev=12
 
-def normal_dist(dev,mean,x):
-    return mt.exp(-0.5*(x-mean)**2/dev**2)/(dev*mt.sqrt(2*mt.pi))
+def normal_dist(d,m,x):
+    return mt.exp(-0.5*(x-m)**2/d**2)/(d*mt.sqrt(2*mt.pi))
 
-mi=0
-
-def prob_normal(dev,mean,mi,mf):
-    Prob=integrate.quad(lambda x: normal_dist(dev,mean,x),mi,mf)
+def prob_normal(d,m,min,max):
+    Prob=integrate.quad(lambda x: normal_dist(d,m,x),min,max)
     return Prob[0]
 
+mi=0
 ########### a1) ##############
 
 print("a1) Exactly 60:",0)
@@ -210,15 +209,8 @@ print("b1) The x at which the Prob=0.75:",find_x_given_prob(Probf,mi,mf))
 
 mi=0
 Probf=0.1539
-rule=[34.1,34.1+13.6,34.1+13.6+2.1]
-for n in range(0,len(rule)+1):
-    if Probf<0.5:
-        r=(0.5-Probf)-rule[n]/100
-        if  r > 0:
-            mf=mean-(n+1)*dev
-        elif r < 0:
-            break
-print(mf)
+
+mf=40
 
 print("b2) The x at which the Prob=0.1539:",find_x_given_prob(Probf,mi,mf))
 
@@ -240,7 +232,9 @@ print("Exactly 170 g:",0)
 mi=160
 mf=180
 Prob=prob_normal(dev,mean,mi,mf)
-print("Exactly 170 g:",Prob)
+print("Between 160 g and 180 g:",Prob)
+
+
 
 
 
