@@ -216,6 +216,7 @@ print("b2) The x at which the Prob=0.1539:",find_x_given_prob(Probf,mi,mf))
 
 
 ############################################################  5 ################################################
+
 print("Exercise 5")
 
 mean=170
@@ -223,18 +224,43 @@ dev=24
 
 ###########   a)    #########
 
+N=50
+dev=24/np.sqrt(50)  #### sd' = sd/\sqrt(N)
+
 ###########   a1)    #########
 
-print("Exactly 170 g:",0)
+print("a1) Exactly 170 g:",0)
 
-###########   a2)    #########
+###########   a2)    ############
 
 mi=160
 mf=180
 Prob=prob_normal(dev,mean,mi,mf)
-print("Between 160 g and 180 g:",Prob)
+print("a2) Between 160 g and 180 g:",Prob)
 
+###########   a3)    #############
 
+mi=0
+mf=180
+Prob=prob_normal(dev,mean,mi,mf)
+print("a3) Higher than 180:",1-Prob)
 
+###########   b)   #############
 
+N=50
+mean=165
+mi=0
+mf=162
+Probf=0.9505 ### N=50; X>162
+Probi=1-Probf
 
+def find_dev_given_prob(Probi,mi,mf):
+    dev=0.1
+    while True:
+        Prob=prob_normal(dev,mean,mi,mf)
+        if  0 < abs(Prob-Probi) < 0.0000+1:
+            return dev
+        else:
+            dev+=0.00001
+dev = find_dev_given_prob(Probi,mi,mf)*np.sqrt(50)
+print("b) The standard deviation of the Second Farm is:",dev)
