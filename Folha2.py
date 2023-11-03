@@ -153,7 +153,7 @@ def normal_dist(d,m,x):
 
 def prob_normal(d,m,min,max):
     Prob=integrate.quad(lambda x: normal_dist(d,m,x),min,max)
-    return Prob[0]
+    return Prob[0]-Prob[1]
 
 mi=0
 ########### a1) ##############
@@ -247,13 +247,6 @@ print("a3) Higher than 180:",1-Prob)
 
 ###########   b)   #############
 
-N=50
-mean=165
-mi=0
-mf=162
-Probf=0.9505 ### N=50; X>162
-Probi=1-Probf
-
 def find_dev_given_prob(Probi,mi,mf):
     dev=0.1
     while True:
@@ -262,5 +255,26 @@ def find_dev_given_prob(Probi,mi,mf):
             return dev
         else:
             dev+=0.00001
+            
+N=50
+mean=165
+mi=0
+mf=162
+Probf=0.9505 ### N=50; X>162
+Probi=1-Probf
+
 dev = find_dev_given_prob(Probi,mi,mf)*np.sqrt(50)
+
 print("b) The standard deviation of the Second Farm is:",dev)
+
+############################################################  5 ################################################
+
+print("Exercise 6")
+
+mean=150
+dev=25
+N=25
+lim=4100
+dev=dev/np.sqrt(N)
+Prob=prob_normal(dev,mean,0,lim)
+print("The probability that the elevator exceeds the limit:",1-Prob)
