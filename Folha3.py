@@ -40,3 +40,4 @@ stax,pvalX=stat.wilcoxon(dataX)
 
 print(pval,pvalX)
 
+
